@@ -1,38 +1,60 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var ejs = require('ejs');
-const sql = require('mssql');
-
-const config = {
-    user: 'azureUser', // better stored in an app setting such as process.env.DB_USER
-    password: 'Pass@123', // better stored in an app setting such as process.env.DB_PASSWORD
-    server: 'tech-fest-nittt.database.windows.net', // better stored in an app setting such as process.env.DB_SERVER
-    port: 1433, // optional, defaults to 1433, better stored in an app setting such as process.env.DB_PORT
-    database: 'TECH_FEST', // better stored in an app setting such as process.env.DB_NAME
-    authentication: {
-        type: 'default'
-    },
-    options: {
-        encrypt: true 
-    }
-}
+var mongoose = require('mongoose');
+var {participate} = require('./ParticipantsSchema');
 
 var app = express();
 var PORT = 3000;
 
-app.set('view engine','ejs');
+var url = "mongodb+srv://rakesh:rakesh@cluster0.dd37o.mongodb.net/?retryWrites=true&w=majority";
+mongoose.set('strictQuery', true);
+mongoose
+  .connect(url, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("Connected!");
+  })
+  .catch((err) => {
+    console.log("oh no error");
+    console.log(err);
+  });
+
+app.set('view engine','ejs'); 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"))
 
 app.get("/",(req,res) => {
-    res.render("index");
+    res.render("index");  
 });
 
 app.get("/register",(req,res) => {
-    res.render("register.ejs");
+    res.render("register");
 })
 
-app.listen(PORT,async() => {
-    //var poolConnection = await sql.connect(config);
+app.post("/register",(req,res) => {
+    var newParticipant = new participate(
+        {
+            Name : req.body.Name, 
+            Email : req.body.Email, 
+            College : req.body.College, 
+            Mobile : req.body.Mobile,
+            TransactionId : req.body.TransactionId
+        });
+
+        newParticipant.save(function(err,data) {
+            if(err){
+                console.log(err);
+            }else{
+                console.log("Data inserted Successfull");
+            }
+        })
+    console.log(req.body);
+    res.redirect("/");
+})
+
+app.listen(PORT,async() => {;
     console.log(`App listing on port ${PORT}`);
 });

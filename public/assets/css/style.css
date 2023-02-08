@@ -8,6 +8,51 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+.innerForm{
+  width: 90%;
+  padding: 30px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.outerForm{
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+  border: 1px solid #30475E;
+  border-radius: 7px;
+  background-color: rgba(13, 20, 41, 0.8);  
+}
+
+.form-col{
+  text-align: center !important;
+}
+
+.form-row{
+  margin-top: 10%;
+}
+
+.form-control{
+  margin-top:12px;
+}
+
+.payNow{
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.payBtn{
+  width:40%;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.QRCode{
+  margin: auto;
+  width: 50%;
+}
+
 body {
   background: #fff;
   color: #2f3138;
@@ -23,9 +68,9 @@ a {
 a:hover,
 a:active,
 a:focus {
-  color: #f8234a;
-  outline: none;
-  text-decoration: none;
+  color: #ffffff;
+  background-color: #30475E;
+  outline: #30475E;
 }
 
 p {
@@ -211,6 +256,16 @@ h6 {
 }
 
 @media (max-width: 992px) {
+  .innerForm{
+    width: 100%;
+  }
+  .outerForm{
+    width: 95%;
+    margin-top: 30%;
+  }
+  .mobile-hidden{
+    display: none;
+  }
   .buy-tickets {
     margin: 0 15px 0 0;
   }
