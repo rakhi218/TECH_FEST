@@ -41,7 +41,7 @@ app.post("/register",(req,res) => {
             Email : req.body.Email, 
             College : req.body.College, 
             Mobile : req.body.Mobile,
-            TransactionId : req.body.TransactionId
+            TransactionId : req.body.Transaction
         });
 
         newParticipant.save(function(err,data) {
