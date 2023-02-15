@@ -4,7 +4,7 @@ var ejs = require('ejs');
 var {participate} = require('./ParticipantsSchema');
 
 var app = express();
-var PORT = 3000;
+var PORT = process.env.PORT || 3000;
 
 app.set('view engine','ejs'); 
 app.use(bodyParser.urlencoded({ extended: true }));
