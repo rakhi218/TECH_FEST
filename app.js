@@ -1,7 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var ejs = require('ejs');
-var {participate} = require('./ParticipantsSchema');
 
 var app = express();
 var PORT = process.env.PORT || 3000;
